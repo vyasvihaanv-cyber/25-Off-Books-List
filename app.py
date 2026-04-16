@@ -176,6 +176,7 @@ if st.button("🟢 WhatsApp Order (Cart)"):
 
     elif name == "" or mobile == "":
         st.warning("कृपया नाव आणि मोबाईल नंबर भरा")
+        
      else:
         phone = "919322630703"
 
