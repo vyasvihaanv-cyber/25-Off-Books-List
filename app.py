@@ -137,7 +137,7 @@ st.markdown("""
 }
 
 .card {
-    background-color: white;
+    background-color: lite;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
