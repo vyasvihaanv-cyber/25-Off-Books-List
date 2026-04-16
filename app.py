@@ -138,8 +138,7 @@ st.write(f"Total Amount: ₹{total_price}")
 # =========================
 # Place Order Button
 # =========================
-if st.button("✅ Place Order"):
-    st.success("🎉 Order Placed Successfully!")
+
 
     order_data = pd.DataFrame({
         "Book": [book_name],
