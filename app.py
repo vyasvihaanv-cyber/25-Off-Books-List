@@ -90,8 +90,9 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
 
 📞 मोबाईल: {mobile}
 
-कृपया ऑर्डर कन्फर्म करा.
+कृपया ऑर्डर कन्फर्म करा. 
 धन्यवाद 🙏
+
 """
 
         url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
