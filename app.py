@@ -39,7 +39,7 @@ book_name = st.selectbox("पुस्तक निवडा", df["पुस्�
 
 selected = df[df["पुस्तकाचे नाव"] == book_name].iloc[0]
 
-author = multiselect["लेखक"]
+author = selected["लेखक"]
 publisher = selected["प्रकाशक"]
 price = selected["किंमत"]
 discount = selected["सवलतीत किंमत"]
