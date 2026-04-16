@@ -131,3 +131,110 @@ else:
     order_data.to_csv("orders.csv", index=False)
 
 
+
+#step1
+
+st.markdown("## 🔍 पुस्तके शोधा")
+
+search = st.text_input("Search book...")
+
+filtered_df = df.copy()
+
+if search:
+    filtered_df = filtered_df[
+        filtered_df["पुस्तकाचे नाव"].str.contains(search, case=False)
+    ]
+
+#step2
+
+
+
+if "cart" not in st.session_state:
+    st.session_state.cart = []
+
+if "wishlist" not in st.session_state:
+    st.session_state.wishlist = []
+
+
+
+#step3
+
+st.markdown("## 📚 पुस्तके")
+
+cols = st.columns(3)  # 3 books per row
+
+for i, (_, row) in enumerate(filtered_df.iterrows()):
+    col = cols[i % 3]
+
+    with col:
+        st.markdown(f"""
+        <div style="background:white;padding:15px;border-radius:10px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.1);margin-bottom:15px">
+        
+        <h4>{row['पुस्तकाचे नाव']}</h4>
+        <p>✍️ {row['लेखक']}</p>
+        <p>🏢 {row['प्रकाशक']}</p>
+
+        <p style="text-decoration:line-through;color:gray;">₹{row['किंमत']}</p>
+        <p style="color:green;font-weight:bold;">₹{row['सवलतीत किंमत']}</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Add to Cart
+        if st.button(f"🛒 Add", key=f"cart_{i}"):
+            st.session_state.cart.append(row.to_dict())
+
+        # Wishlist
+        if st.button(f"❤️ Wishlist", key=f"wish_{i}"):
+            st.session_state.wishlist.append(row.to_dict())
+
+#step4
+st.markdown("## 🛒 Cart")
+
+total = 0
+
+if len(st.session_state.cart) == 0:
+    st.info("Cart रिकामा आहे")
+else:
+    for item in st.session_state.cart:
+        st.write(f"📚 {item['पुस्तकाचे नाव']} - ₹{item['सवलतीत किंमत']}")
+        total += item["सवलतीत किंमत"]
+
+    st.markdown(f"### 💰 Total: ₹{total}")
+
+#step5
+st.markdown("## ❤️ Wishlist")
+
+if len(st.session_state.wishlist) == 0:
+    st.info("Wishlist रिकामी आहे")
+else:
+    for item in st.session_state.wishlist:
+        st.write(f"📚 {item['पुस्तकाचे नाव']}")
+
+#step6
+import urllib.parse
+
+if st.button("🟢 WhatsApp Order (Cart)"):
+
+    if len(st.session_state.cart) == 0:
+        st.warning("Cart रिकामा आहे")
+    else:
+        message = "नमस्कार 🙏\n\nमला खालील पुस्तके हवी आहेत:\n\n"
+
+        for item in st.session_state.cart:
+            message += f"📚 {item['पुस्तकाचे नाव']} - ₹{item['सवलतीत किंमत']}\n"
+
+        message += f"\n💰 Total: ₹{total}"
+
+        phone = "919322630703"
+        url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
+
+        st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({url})")
+
+
+#step7
+if row['पुस्तकाचे नाव'] not in [x['पुस्तकाचे नाव'] for x in st.session_state.cart]:
+
+
+$#if row['पुस्तकाचे नाव'] not in [x['पुस्तकाचे नाव'] for x in st.session_state.cart]:
