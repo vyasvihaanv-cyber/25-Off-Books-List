@@ -101,24 +101,13 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     discount_percent = int(((price - discount) / price) * 100)
 
     with col:
-        st.markdown(f"""
-        <div class="card">
-            <h4>{book}</h4>
-            <p>✍️ लेखक: {author}</p>
-            <p>🏢 प्रकाशक: {publisher}</p>
+      <p style="text-decoration: line-through; color: gray;">
+    मूळ किंमत: ₹{price}
+</p>
 
-            <p class="old-price">₹{price}</p>
-            <p class="price">🔥 ₹{discount}</p>
-            <p class="discount">{discount_percent}% OFF</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        # Initialize cart
-        if book not in st.session_state.cart:
-            st.session_state.cart[book] = {"qty": 0, "price": discount}
-
-        c1, c2, c3 = st.columns([1,1,1])
-
+<p style="color: green; font-weight:bold;">
+    सवलतीत: ₹{discount}
+</p>
         # ➖
         with c1:
             if st.button("➖", key=f"minus_{i}"):
