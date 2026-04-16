@@ -99,3 +99,93 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
         st.success("👇 खाली क्लिक करा आणि WhatsApp वर ऑर्डर पाठवा")
 
         st.markdown(f"[📲 WhatsApp वर ऑर्डर पाठवा]({url})")
+
+
+
+User → WhatsApp Order
+        ↓
+Streamlit → Save Order (CSV)
+        ↓
+Admin Dashboard → View + Analyze
+
+# Save order to CSV
+order_data = pd.DataFrame([{
+    "Name": name,
+    "Mobile": mobile,
+    "Book": book_name,
+    "Author": author,
+    "Publisher": publisher,
+    "Quantity": quantity,
+    "Total": total
+}])
+
+if os.path.exists("orders.csv"):
+    order_data.to_csv("orders.csv", mode='a', header=False, index=False)
+else:
+    order_data.to_csv("orders.csv", index=False)
+
+
+import streamlit as st
+import pandas as pd
+import os
+
+st.title("📊 Admin Dashboard")
+
+# =========================
+# Password Protection
+# =========================
+password = st.text_input("Enter Admin Password", type="password")
+
+if password != "admin123":
+    st.warning("Access Denied")
+    st.stop()
+
+# =========================
+# Load Orders
+# =========================
+if os.path.exists("orders.csv"):
+    df = pd.read_csv("orders.csv")
+else:
+    st.error("No orders yet")
+    st.stop()
+
+# =========================
+# Show Data
+# =========================
+st.subheader("📦 All Orders")
+st.dataframe(df)
+
+# =========================
+# Metrics
+# =========================
+st.subheader("📈 Sales Summary")
+
+total_orders = len(df)
+total_revenue = df["Total"].sum()
+
+st.write(f"Total Orders: {total_orders}")
+st.write(f"Total Revenue: ₹{total_revenue}")
+
+# =========================
+# Top Books
+# =========================
+st.subheader("🔥 Top Selling Books")
+
+top_books = df["Book"].value_counts()
+
+st.bar_chart(top_books)
+
+# =========================
+# Download Orders
+# =========================
+csv = df.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="📥 Download Orders CSV",
+    data=csv,
+    file_name="orders.csv",
+    mime="text/csv"
+)
+
+
+
