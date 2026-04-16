@@ -3,32 +3,26 @@ import pandas as pd
 import urllib.parse
 import os
 
-
 # =========================
-# HEADER (LOGO + TITLE)
-# =========================
-col1, col2 = st.columns([1,6])
-
-with col1:
-    if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", width=800)
-
-with col2:
-    st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
-    st.markdown("<medium>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यंत</medium>", unsafe_allow_html=True)
-# =========================
-# PAGE CONFIG
+# PAGE CONFIG (TOP ला हवाच)
 # =========================
 st.set_page_config(page_title="Book Store", layout="wide")
 
 # =========================
-# CSS (Professional UI)
+# FONT + CSS
 # =========================
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap');
+
+html, body, [class*="css"]  {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
 .stApp {
     background-color: #f5f7fa;
 }
+
 .card {
     background-color: white;
     padding: 15px;
@@ -39,7 +33,18 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# =========================
+# HEADER (LOGO + TITLE)
+# =========================
+col1, col2 = st.columns([1,6])
 
+with col1:
+    if os.path.exists("logo.jpg"):
+        st.image("logo.jpg", width=100)
+
+with col2:
+    st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
+    st.markdown("<small>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यंत</small>", unsafe_allow_html=True)
 
 # =========================
 # LOAD DATA
@@ -70,10 +75,7 @@ if "cart" not in st.session_state:
 # =========================
 # BOOK GRID
 # =========================
-# =========================
-# BOOK GRID
-# =========================
-st.markdown("## 📚 खालील २५ पुस्तके विशेष सवलतीत !")
+st.markdown("## 📚 खालील पुस्तके विशेष सवलतीत !")
 
 cols = st.columns(3)
 
@@ -94,7 +96,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         <p>✍️ लेखक: {author}</p>
         <p>🏢 प्रकाशक: {publisher}</p>
 
-        <p style="text-decoration: line-through; color: gray; margin-bottom:5px;">
+        <p style="text-decoration: line-through; color: gray;">
             ₹{price}
         </p>
 
@@ -104,7 +106,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         </div>
         """, unsafe_allow_html=True)
 
-        # Initialize qty
+        # Initialize cart
         if book not in st.session_state.cart:
             st.session_state.cart[book] = {"qty": 0, "price": discount}
 
@@ -116,7 +118,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
                 if st.session_state.cart[book]["qty"] > 0:
                     st.session_state.cart[book]["qty"] -= 1
 
-        # Qty display
+        # Qty
         with c2:
             st.markdown(
                 f"<h4 style='text-align:center'>{st.session_state.cart[book]['qty']}</h4>",
@@ -126,8 +128,10 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         # ➕
         with c3:
             if st.button("➕", key=f"plus_{i}"):
-                st.session_state.cart[book]["qty"] += 1# =========================
-# CART DISPLAY
+                st.session_state.cart[book]["qty"] += 1
+
+# =========================
+# CART
 # =========================
 st.markdown("## 🛒 Cart")
 
@@ -160,7 +164,6 @@ with col3:
 with col4:
     mobile = st.text_input("मोबाईल नंबर")
 
-
 # =========================
 # WHATSAPP ORDER
 # =========================
@@ -174,7 +177,7 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
         message = "नमस्कार 🙏\n\nमला खालील पुस्तके हवी आहेत:\n\n"
 
         for book, item in st.session_state.cart.items():
-            if item["qty"] > 1:
+            if item["qty"] > 0:   # 🔥 FIX
                 amt = item["qty"] * item["price"]
                 message += f"📚 {book} (Qty: {item['qty']}) - ₹{amt}\n"
 
