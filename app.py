@@ -97,6 +97,7 @@ st.markdown(f"""
     </p>
 </div>
 """, unsafe_allow_html=True)
+
         # Initialize qty
         if book not in st.session_state.cart:
             st.session_state.cart[book] = {"qty": 0, "price": price}
