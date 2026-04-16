@@ -25,7 +25,7 @@ else:
 st.header("🛒 ऑर्डर करा")
 
 book_name = st.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
-
+quantity  = st.session_state.qty = 1
 selected = df[df["पुस्तकाचे नाव"] == book_name].iloc[0]
 
 author = selected["लेखक"]
