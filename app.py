@@ -79,7 +79,8 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     author = row["लेखक"]
     publisher = row["प्रकाशक"]
     price = row["सवलतीत किंमत"]
-
+<p>✍️ {author}</p>
+<p style="color:green;font-weight:bold;">₹{price}</p>
     with col:
         st.markdown(f"""
         <div class="card">
