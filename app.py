@@ -131,11 +131,11 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 # =========================
 st.markdown("## 🛒 Cart")
 
-total = 1
+total = 0
 has_items = False
 
 for book, item in st.session_state.cart.items():
-    if item["qty"] > 1:
+    if item["qty"] > 0:
         has_items = True
         item_total = item["qty"] * item["price"]
         total += item_total
