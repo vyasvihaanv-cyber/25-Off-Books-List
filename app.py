@@ -152,7 +152,7 @@ st.markdown(f"### 💰 Total: ₹{total}")
 # =========================
 st.markdown("## 👤 तुमची माहिती")
 
-col3, col4 = st.columns(2)
+col3, col4, col15 = st.columns(3)
 
 with col3:
     name = st.text_input("नाव")
