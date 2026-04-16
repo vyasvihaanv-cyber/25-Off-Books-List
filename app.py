@@ -63,7 +63,7 @@ st.write(f"Total: ₹{total}")
 st.subheader("👤 तुमची माहिती")
 
 name = st.text_input("नाव")
-mobile = st.text_input("मोबाईल नंबर")
+mobile = st.text_input("मोबाईल नंबर WhatsApp")
 address = st.text_input("पत्ता")
 # =========================
 # WHATSAPP ORDER
