@@ -131,3 +131,22 @@ else:
     order_data.to_csv("orders.csv", index=False)
 
 
+import urllib.parse
+
+if st.button("🟢 WhatsApp Order (All Books)"):
+
+    if len(st.session_state.cart) == 0:
+        st.warning("Cart रिकामा आहे")
+    else:
+        message = "नमस्कार 🙏\n\nमला खालील पुस्तके ऑर्डर करायची आहेत:\n\n"
+
+        for item in st.session_state.cart:
+            message += f"📚 {item['Book']} (Qty: {item['Qty']}) - ₹{item['Price'] * item['Qty']}\n"
+
+        message += f"\n💰 Total: ₹{total_amount}"
+
+        phone = "919322630703"
+        url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
+
+        st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({url})")
+
