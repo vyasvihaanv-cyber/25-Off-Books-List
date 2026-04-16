@@ -171,7 +171,7 @@ if st.button("🟢 WhatsApp Order"):
         msg += f"\nMobile: {mobile}"
 
         url = f"https://wa.me/919322630703?text={urllib.parse.quote(msg)}"
-        st.markdown(f"[📲 WhatsApp Order "इथे क्लिक करून WhatsApp करता येईल"]({url})")
+        st.markdown(f"[📲 WhatsApp Order]({url})")
 
 # =========================
 # CLEAR
