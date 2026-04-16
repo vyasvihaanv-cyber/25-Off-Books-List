@@ -4,18 +4,18 @@ import urllib.parse
 import os
 
 # =========================
-# PAGE CONFIG (TOP ला हवाच)
+# PAGE CONFIG
 # =========================
 st.set_page_config(page_title="Book Store", layout="wide")
 
 # =========================
-# FONT + CSS
+# CSS + FONT
 # =========================
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&display=swap');
 
-html, body, [class*="css"]  {
+html, body {
     font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
@@ -34,26 +34,26 @@ html, body, [class*="css"]  {
 """, unsafe_allow_html=True)
 
 # =========================
-# HEADER (LOGO + TITLE)
+# HEADER
 # =========================
 col1, col2 = st.columns([1,6])
 
 with col1:
     if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", width=100)
+        st.image("logo.jpg", width=900)
 
 with col2:
-    st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
-    st.markdown("<small>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यंत</small>", unsafe_allow_html=True)
+    st.markdown("<h2>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
+    st.caption("🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यंत")
 
 # =========================
 # LOAD DATA
 # =========================
-if os.path.exists("books_marathi.csv"):
-    df = pd.read_csv("books_marathi.csv")
-else:
-    st.error("❌ books_marathi.csv file नाही")
+if not os.path.exists("books_marathi.csv"):
+    st.error("CSV file नाही")
     st.stop()
+
+df = pd.read_csv("books_marathi.csv")
 
 # =========================
 # SEARCH
@@ -67,7 +67,7 @@ if search:
     ]
 
 # =========================
-# SESSION STATE CART
+# CART INIT
 # =========================
 if "cart" not in st.session_state:
     st.session_state.cart = {}
@@ -75,7 +75,7 @@ if "cart" not in st.session_state:
 # =========================
 # BOOK GRID
 # =========================
-st.markdown("## 📚 खालील पुस्तके विशेष सवलतीत !")
+st.markdown("## 📚 पुस्तके")
 
 cols = st.columns(3)
 
@@ -92,21 +92,13 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         st.markdown(f"""
         <div class="card">
         <h4>{book}</h4>
-
-        <p>✍️ लेखक: {author}</p>
-        <p>🏢 प्रकाशक: {publisher}</p>
-
-        <p style="text-decoration: line-through; color: gray;">
-            ₹{price}
-        </p>
-
-        <p style="color: green; font-weight: bold; font-size:18px;">
-            ₹{discount}
-        </p>
+        <p>✍️ {author}</p>
+        <p>🏢 {publisher}</p>
+        <p style="text-decoration: line-through;">₹{price}</p>
+        <p style="color:green;font-weight:bold;">₹{discount}</p>
         </div>
         """, unsafe_allow_html=True)
 
-        # Initialize cart
         if book not in st.session_state.cart:
             st.session_state.cart[book] = {"qty": 0, "price": discount}
 
@@ -117,6 +109,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
             if st.button("➖", key=f"minus_{i}"):
                 if st.session_state.cart[book]["qty"] > 0:
                     st.session_state.cart[book]["qty"] -= 1
+                    st.rerun()
 
         # Qty
         with c2:
@@ -129,6 +122,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         with c3:
             if st.button("➕", key=f"plus_{i}"):
                 st.session_state.cart[book]["qty"] += 1
+                st.rerun()
 
 # =========================
 # CART
@@ -141,80 +135,46 @@ has_items = False
 for book, item in st.session_state.cart.items():
     if item["qty"] > 0:
         has_items = True
-        item_total = item["qty"] * item["price"]
-        total += item_total
-
-        st.write(f"📚 {book} | Qty: {item['qty']} | ₹{item_total}")
+        amt = item["qty"] * item["price"]
+        total += amt
+        st.write(f"📚 {book} | Qty: {item['qty']} | ₹{amt}")
 
 if not has_items:
     st.info("Cart रिकामा आहे")
 
 st.markdown(f"### 💰 Total: ₹{total}")
 
-
-
-# ➖
-with c1:
-    if st.button("➖", key=f"minus_{i}"):
-        if st.session_state.cart[book]["qty"] > 0:
-            st.session_state.cart[book]["qty"] -= 1
-            st.rerun()
-
-# Qty
-with c2:
-    st.markdown(
-        f"<h4 style='text-align:center'>{st.session_state.cart[book]['qty']}</h4>",
-        unsafe_allow_html=True
-    )
-
-# ➕
-with c3:
-    if st.button("➕", key=f"plus_{i}"):
-        st.session_state.cart[book]["qty"] += 1
-        st.rerun()
+# =========================
+# USER INFO
+# =========================
+name = st.text_input("नाव")
+mobile = st.text_input("मोबाईल नंबर")
 
 # =========================
-# CUSTOMER INFO
+# WHATSAPP
 # =========================
-st.markdown("## 👤 तुमची माहिती")
-
-col3, col4 = st.columns(2)
-
-with col3:
-    name = st.text_input("नाव")
-
-with col4:
-    mobile = st.text_input("मोबाईल नंबर")
-
-# =========================
-# WHATSAPP ORDER
-# =========================
-if st.button("🟢 WhatsApp वर ऑर्डर करा"):
+if st.button("🟢 WhatsApp Order"):
 
     if not has_items:
         st.warning("Cart रिकामा आहे")
-    elif name == "" or mobile == "":
-        st.warning("कृपया नाव आणि मोबाईल नंबर भरा")
+    elif not name or not mobile:
+        st.warning("माहिती भरा")
     else:
-        message = "नमस्कार 🙏\n\nमला खालील पुस्तके हवी आहेत:\n\n"
+        msg = "नमस्कार 🙏\n\nOrder:\n\n"
 
         for book, item in st.session_state.cart.items():
-            if item["qty"] > 0:   # 🔥 FIX
-                amt = item["qty"] * item["price"]
-                message += f"📚 {book} (Qty: {item['qty']}) - ₹{amt}\n"
+            if item["qty"] > 0:
+                msg += f"{book} x {item['qty']} = ₹{item['qty']*item['price']}\n"
 
-        message += f"\n💰 Total: ₹{total}"
-        message += f"\n👤 नाव: {name}"
-        message += f"\n📞 मोबाईल: {mobile}"
+        msg += f"\nTotal: ₹{total}"
+        msg += f"\nName: {name}"
+        msg += f"\nMobile: {mobile}"
 
-        phone = "919322630703"
-        url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
-
-        st.success("👇 WhatsApp वर ऑर्डर पाठवा")
-        st.markdown(f"[📲 WhatsApp वर क्लिक करा]({url})")
+        url = f"https://wa.me/919322630703?text={urllib.parse.quote(msg)}"
+        st.markdown(f"[📲 WhatsApp Order]({url})")
 
 # =========================
-# CLEAR CART
+# CLEAR
 # =========================
 if st.button("🗑️ Clear Cart"):
     st.session_state.cart = {}
