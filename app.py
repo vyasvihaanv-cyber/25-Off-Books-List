@@ -130,4 +130,17 @@ else:
     order_data.to_csv("orders.csv", index=False)
 
 
+st.markdown("""
+<style>
+.stApp {
+    background-color: #f5f7fa;
+}
 
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+}
+</style>
+""", unsafe_allow_html=True)
