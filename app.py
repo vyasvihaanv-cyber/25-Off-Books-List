@@ -3,6 +3,19 @@ import pandas as pd
 import urllib.parse
 import os
 
+
+# =========================
+# HEADER (LOGO + TITLE)
+# =========================
+col1, col2 = st.columns([1,6])
+
+with col1:
+    if os.path.exists("logo.png"):
+        st.image("logo.png", width=800)
+
+with col2:
+    st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
+    st.markdown("<small>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६</small>", unsafe_allow_html=True)
 # =========================
 # PAGE CONFIG
 # =========================
@@ -75,9 +88,12 @@ cols = st.columns(3)
 for i, (_, row) in enumerate(filtered_df.iterrows()):
     col = cols[i % 3]
 
-    book = row["पुस्तकाचे नाव"]
+     book = row["पुस्तकाचे नाव"]
     author = row["लेखक"]
-    price = row["सवलतीत किंमत"]
+    publisher = row["प्रकाशक"]
+    price = row["किंमत"]
+    discount = row["सवलतीत किंमत"]
+
 
     with col:
         st.markdown(f"""
