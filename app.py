@@ -141,3 +141,23 @@ if st.button("🟢 Order via WhatsApp"):
 
     st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({whatsapp_url})", unsafe_allow_html=True)
 
+
+
+st.markdown("""
+<style>
+.big-button {
+    background-color: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+customer_name = st.text_input("तुमचे नाव")
+
+    address = st.text_area("पत्ता")
+
+
