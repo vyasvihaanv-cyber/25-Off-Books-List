@@ -99,8 +99,8 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
         # Initialize qty
-    if book not in st.session_state.cart:
-        st.session_state.cart[book] = {"qty": 0, "price": price}
+if book not in st.session_state.cart:
+    st.session_state.cart[book] = {"qty": 0, "price": price}
 
         c1, c2, c3 = st.columns([1,1,1])
 
