@@ -22,9 +22,9 @@ else:
 # =========================
 # USER INPUT
 # =========================
-st.sidebar.header("🛒 ऑर्डर करा")
+st.header("🛒 ऑर्डर करा")
 
-book_name = st.sidebar.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
+book_name = st.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
 
 selected = df[df["पुस्तकाचे नाव"] == book_name].iloc[0]
 
