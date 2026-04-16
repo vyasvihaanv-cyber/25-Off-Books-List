@@ -33,7 +33,7 @@ publisher = selected["प्रकाशक"]
 price = selected["किंमत"]
 discount = selected["सवलतीत किंमत"]
 
-quantity = st.sidebar.number_input("Quantity", 1, 10, 1)
+quantity = st.number_input("Quantity", 1, 10, 1)
 
 # =========================
 # DISPLAY BOOK
