@@ -171,8 +171,12 @@ if st.button("🟢 WhatsApp Order"):
         msg += f"\nMobile: {mobile}"
 
         url = f"https://wa.me/919322630703?text={urllib.parse.quote(msg)}"
-        st.markdown(f"[📲 WhatsApp Order]({url})")
-
+   
+st.markdown(f"""
+<a href="{url}" target="_blank" class="big-btn">
+📲 WhatsApp वर ऑर्डर करा
+</a>
+""", unsafe_allow_html=True)
 # =========================
 # CLEAR
 # =========================
