@@ -158,6 +158,6 @@ st.markdown("""
 
 customer_name = st.text_input("तुमचे नाव")
 
-    address = st.text_area("पत्ता")
+address = st.text_area("पत्ता")
 
 
