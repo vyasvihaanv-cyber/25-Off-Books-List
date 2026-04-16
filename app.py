@@ -9,13 +9,14 @@ import os
 st.set_page_config(page_title="Book Store", layout="wide")
 
 # =========================
-# CSS (Professional UI)
+# CUSTOM CSS (Professional UI)
 # =========================
 st.markdown("""
 <style>
 .stApp {
     background-color: #f5f7fa;
 }
+
 .card {
     background-color: white;
     padding: 15px;
@@ -23,11 +24,27 @@ st.markdown("""
     box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     margin-bottom: 15px;
 }
+
+.price {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.discount {
+    color: red;
+    font-weight: bold;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # =========================
-# HEADER (LOGO + TITLE)
+# HEADER (LOGO + SHOP NAME)
 # =========================
 col1, col2 = st.columns([1,6])
 
@@ -76,34 +93,33 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     col = cols[i % 3]
 
     book = row["पुस्तकाचे नाव"]
-author = row["लेखक"]
-publisher = row["प्रकाशक"]
-price = row["किंमत"]
-discount = row["सवलतीत किंमत"]
+    author = row["लेखक"]
+    publisher = row["प्रकाशक"]
+    price = row["किंमत"]
+    discount = row["सवलतीत किंमत"]
 
-st.markdown(f"""
-<div class="card">
-    <h4>{book}</h4>
+    discount_percent = int(((price - discount) / price) * 100)
 
-    <p>✍️ लेखक: {author}</p>
-    <p>🏢 प्रकाशक: {publisher}</p>
+    with col:
+        st.markdown(f"""
+        <div class="card">
+            <h4>{book}</h4>
+            <p>✍️ लेखक: {author}</p>
+            <p>🏢 प्रकाशक: {publisher}</p>
 
-    <p style="text-decoration: line-through; color: gray;">
-        ₹{price}
-    </p>
+            <p class="old-price">₹{price}</p>
+            <p class="price">🔥 ₹{discount}</p>
+            <p class="discount">{discount_percent}% OFF</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    <p style="color: green; font-size:18px; font-weight:bold;">
-        🔥 ₹{discount}
-    </p>
-</div>
-""", unsafe_allow_html=True)
+        # Initialize cart
+        if book not in st.session_state.cart:
+            st.session_state.cart[book] = {"qty": 0, "price": discount}
 
-        # Initialize qty
-if book not in st.session_state.cart:
-    st.session_state.cart[book] = {"qty": 0, "price": price}
-    
-    c1, c2, c3 = st.columns([1,1,1])
+        c1, c2, c3 = st.columns([1,1,1])
 
+        # ➖
         with c1:
             if st.button("➖", key=f"minus_{i}"):
                 if st.session_state.cart[book]["qty"] > 0:
