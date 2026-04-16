@@ -131,11 +131,11 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 # =========================
 st.markdown("## 🛒 Cart")
 
-total = 0
+total = 1
 has_items = False
 
 for book, item in st.session_state.cart.items():
-    if item["qty"] > 0:
+    if item["qty"] > 1:
         has_items = True
         item_total = item["qty"] * item["price"]
         total += item_total
@@ -174,7 +174,7 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
         message = "नमस्कार 🙏\n\nमला खालील पुस्तके हवी आहेत:\n\n"
 
         for book, item in st.session_state.cart.items():
-            if item["qty"] > 0:
+            if item["qty"] > 1:
                 amt = item["qty"] * item["price"]
                 message += f"📚 {book} (Qty: {item['qty']}) - ₹{amt}\n"
 
