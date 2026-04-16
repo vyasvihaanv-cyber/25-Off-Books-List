@@ -76,19 +76,27 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     col = cols[i % 3]
 
     book = row["पुस्तकाचे नाव"]
-    author = row["लेखक"]
-    publisher = row["प्रकाशक"]
-    price = row["सवलतीत किंमत"]
+author = row["लेखक"]
+publisher = row["प्रकाशक"]
+price = row["किंमत"]
+discount = row["सवलतीत किंमत"]
 
-    with col:
-        st.markdown(f"""
-        <div class="card">
-        <h4>{book}</h4>
-        <p>✍️ {author}</p>
-        <p style="color:green;font-weight:bold;">₹{price}</p>
-        </div>
-        """, unsafe_allow_html=True)
+st.markdown(f"""
+<div class="card">
+    <h4>{book}</h4>
 
+    <p>✍️ लेखक: {author}</p>
+    <p>🏢 प्रकाशक: {publisher}</p>
+
+    <p style="text-decoration: line-through; color: gray;">
+        ₹{price}
+    </p>
+
+    <p style="color: green; font-size:18px; font-weight:bold;">
+        🔥 ₹{discount}
+    </p>
+</div>
+""", unsafe_allow_html=True)
         # Initialize qty
         if book not in st.session_state.cart:
             st.session_state.cart[book] = {"qty": 0, "price": price}
