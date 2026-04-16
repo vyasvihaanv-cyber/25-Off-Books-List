@@ -151,6 +151,28 @@ if not has_items:
 
 st.markdown(f"### 💰 Total: ₹{total}")
 
+
+
+# ➖
+with c1:
+    if st.button("➖", key=f"minus_{i}"):
+        if st.session_state.cart[book]["qty"] > 0:
+            st.session_state.cart[book]["qty"] -= 1
+            st.rerun()
+
+# Qty
+with c2:
+    st.markdown(
+        f"<h4 style='text-align:center'>{st.session_state.cart[book]['qty']}</h4>",
+        unsafe_allow_html=True
+    )
+
+# ➕
+with c3:
+    if st.button("➕", key=f"plus_{i}"):
+        st.session_state.cart[book]["qty"] += 1
+        st.rerun()
+
 # =========================
 # CUSTOMER INFO
 # =========================
