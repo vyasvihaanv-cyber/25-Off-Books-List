@@ -152,7 +152,7 @@ st.markdown(f"### 💰 Total: ₹{total}")
 # =========================
 st.markdown("## 👤 तुमची माहिती")
 
-col3, col4, col15 = st.columns(3)
+col3, col4 = st.columns(2)
 
 with col3:
     name = st.text_input("नाव")
@@ -160,8 +160,7 @@ with col3:
 with col4:
     mobile = st.text_input("मोबाईल नंबर")
 
-with col5:
-    address = st.text_input("संपूर्ण पत्ता")
+
 # =========================
 # WHATSAPP ORDER
 # =========================
