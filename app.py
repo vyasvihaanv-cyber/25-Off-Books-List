@@ -101,9 +101,9 @@ st.markdown(f"""
         # Initialize qty
 if book not in st.session_state.cart:
     st.session_state.cart[book] = {"qty": 0, "price": price}
+    
     c1, c2, c3 = st.columns([1,1,1])
 
-        # ➖
         with c1:
             if st.button("➖", key=f"minus_{i}"):
                 if st.session_state.cart[book]["qty"] > 0:
