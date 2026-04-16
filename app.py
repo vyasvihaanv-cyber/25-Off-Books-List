@@ -34,37 +34,6 @@ else:
 # =========================
 st.header("🛒 ऑर्डर करा")
 
-st.subheader("🛒 तुमचा Cart")
-
-total_amount = 0
-
-if len(st.session_state.cart) == 0:
-    st.info("Cart रिकामा आहे")
-else:
-    for i, item in enumerate(st.session_state.cart):
-
-        col1, col2, col3 = st.columns([3,1,1])
-
-        with col1:
-            st.write(f"📚 {item['Book']}")
-
-        with col2:
-            qty = st.number_input(
-                f"Qty {i}",
-                min_value=1,
-                value=item["Qty"],
-                key=f"qty_{i}"
-            )
-            item["Qty"] = qty
-
-        with col3:
-            if st.button("❌", key=f"remove_{i}"):
-                st.session_state.cart.pop(i)
-                st.rerun()
-
-        total_amount += item["Price"] * item["Qty"]
-
-    st.markdown(f"### 💰 Total: ₹{total_amount}")
 
 book_name = st.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
 
