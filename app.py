@@ -233,8 +233,4 @@ if st.button("🟢 WhatsApp Order (Cart)"):
         st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({url})")
 
 
-#step7
-if row['पुस्तकाचे नाव'] not in [x['पुस्तकाचे नाव'] for x in st.session_state.cart]:
 
-
-$#if row['पुस्तकाचे नाव'] not in [x['पुस्तकाचे नाव'] for x in st.session_state.cart]:
