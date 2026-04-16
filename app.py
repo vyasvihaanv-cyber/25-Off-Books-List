@@ -70,6 +70,9 @@ if "cart" not in st.session_state:
 # =========================
 # BOOK GRID
 # =========================
+# =========================
+# BOOK GRID
+# =========================
 st.markdown("## 📚 पुस्तके")
 
 cols = st.columns(3)
@@ -83,19 +86,27 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     price = row["किंमत"]
     discount = row["सवलतीत किंमत"]
 
-
     with col:
         st.markdown(f"""
         <div class="card">
         <h4>{book}</h4>
-        <p>✍️ {author}</p>
-        <p style="color:green;font-weight:bold;">₹{price}</p>
+
+        <p>✍️ लेखक: {author}</p>
+        <p>🏢 प्रकाशक: {publisher}</p>
+
+        <p style="text-decoration: line-through; color: gray; margin-bottom:5px;">
+            ₹{price}
+        </p>
+
+        <p style="color: green; font-weight: bold; font-size:18px;">
+            ₹{discount}
+        </p>
         </div>
         """, unsafe_allow_html=True)
 
         # Initialize qty
         if book not in st.session_state.cart:
-            st.session_state.cart[book] = {"qty": 0, "price": price}
+            st.session_state.cart[book] = {"qty": 0, "price": discount}
 
         c1, c2, c3 = st.columns([1,1,1])
 
@@ -115,9 +126,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
         # ➕
         with c3:
             if st.button("➕", key=f"plus_{i}"):
-                st.session_state.cart[book]["qty"] += 1
-
-# =========================
+                st.session_state.cart[book]["qty"] += 1# =========================
 # CART DISPLAY
 # =========================
 st.markdown("## 🛒 Cart")
