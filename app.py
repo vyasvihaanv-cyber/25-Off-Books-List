@@ -15,6 +15,7 @@ with col1:
 
 with col2:
     st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom:0;'>📚 +91 93226 30703</h2>", unsafe_allow_html=True)
     st.markdown("<medium>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यंत</medium>", unsafe_allow_html=True)
 # =========================
 # PAGE CONFIG
