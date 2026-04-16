@@ -106,14 +106,14 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 
         # Initialize qty
         if book not in st.session_state.cart:
-            st.session_state.cart[book] = {"qty": 1, "price": discount}
+            st.session_state.cart[book] = {"qty": 0, "price": discount}
 
         c1, c2, c3 = st.columns([1,1,1])
 
         # ➖
         with c1:
             if st.button("➖", key=f"minus_{i}"):
-                if st.session_state.cart[book]["qty"] > 1:
+                if st.session_state.cart[book]["qty"] > 0:
                     st.session_state.cart[book]["qty"] -= 1
 
         # Qty display
