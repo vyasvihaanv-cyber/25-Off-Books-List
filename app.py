@@ -9,11 +9,9 @@ col1, col2 = st.columns([1,5])
 
 with col1:
     if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", width=80)
+        st.image("logo.jpg", width=800)
 
-with col2:
-    st.markdown("<h2>राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
-    st.markdown("🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यन्त")
+
     
 # =========================
 # SHOP INFO
