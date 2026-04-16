@@ -15,7 +15,7 @@ with col1:
 
 with col2:
     st.markdown("<h2 style='margin-bottom:0;'>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
-    st.markdown("<small>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६</small>", unsafe_allow_html=True)
+    st.markdown("<medium>🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६</medium>", unsafe_allow_html=True)
 # =========================
 # PAGE CONFIG
 # =========================
@@ -73,7 +73,7 @@ if "cart" not in st.session_state:
 # =========================
 # BOOK GRID
 # =========================
-st.markdown("## 📚 पुस्तके")
+st.markdown("## 📚 खालील २५ पुस्तके विशेष सवलतीत !")
 
 cols = st.columns(3)
 
