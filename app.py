@@ -2,6 +2,63 @@ import streamlit as st
 import pandas as pd
 import pickle
 
+
+
+st.title("📚 राजहंस पुस्तक पेठ , पुणे ०३८")
+
+st.markdown("### 🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यन्त")
+st.markdown("📲 WhatsApp Order Available")
+
+
+import urllib.parse
+
+if st.button("🟢 Order via WhatsApp"):
+
+    phone_number = "919322630703"  # 91 + number (India)
+
+    message = f"""
+नमस्कार,
+
+मला खालील पुस्तक ऑर्डर करायचे आहे:
+
+📖 पुस्तक: {book_name}
+✍️ लेखक: {author}
+🏢 प्रकाशक: {publisher}
+
+🔢 Quantity: {quantity}
+💰 एकूण किंमत: ₹{total_price}
+
+कृपया ऑर्डर कन्फर्म करा.
+"""
+
+    encoded_message = urllib.parse.quote(message)
+
+    whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
+
+    st.success("👉 Click below to send order on WhatsApp")
+
+    st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({whatsapp_url})", unsafe_allow_html=True)
+
+
+
+st.markdown("""
+<style>
+.big-button {
+    background-color: #25D366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+customer_name = st.text_input("तुमचे नाव")
+
+address = st.text_area("पत्ता")
+
+
 # =========================
 # Load Data
 # =========================
@@ -106,58 +163,5 @@ if st.button("✅ Place Order"):
     )
 
 
-st.title("📚 राजहंस पुस्तक पेठ , पुणे ०३८")
-
-st.markdown("### 🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६ पर्यन्त")
-st.markdown("📲 WhatsApp Order Available")
-
-
-import urllib.parse
-
-if st.button("🟢 Order via WhatsApp"):
-
-    phone_number = "919322630703"  # 91 + number (India)
-
-    message = f"""
-नमस्कार,
-
-मला खालील पुस्तक ऑर्डर करायचे आहे:
-
-📖 पुस्तक: {book_name}
-✍️ लेखक: {author}
-🏢 प्रकाशक: {publisher}
-
-🔢 Quantity: {quantity}
-💰 एकूण किंमत: ₹{total_price}
-
-कृपया ऑर्डर कन्फर्म करा.
-"""
-
-    encoded_message = urllib.parse.quote(message)
-
-    whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
-
-    st.success("👉 Click below to send order on WhatsApp")
-
-    st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({whatsapp_url})", unsafe_allow_html=True)
-
-
-
-st.markdown("""
-<style>
-.big-button {
-    background-color: #25D366;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 18px;
-}
-</style>
-""", unsafe_allow_html=True)
-
-customer_name = st.text_input("तुमचे नाव")
-
-address = st.text_area("पत्ता")
 
 
