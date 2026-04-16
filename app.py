@@ -9,7 +9,7 @@ col1, col2 = st.columns([1,5])
 
 with col1:
     if os.path.exists("logo.jpg"):
-        st.image("logo.jpg", width=800)
+        st.image("logo.jpg", width=1500)
 
 
     
