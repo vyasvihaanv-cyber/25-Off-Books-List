@@ -170,10 +170,13 @@ address = st.text_input("पत्ता")
 # WHATSAPP ORDER
 # =========================
 
+if st.button("🟢 WhatsApp Order (Cart)"):
+    if len(st.session_state.cart) == 0:
+        st.warning("Cart रिकामा आहे")
 
-    if name == "" or mobile == "":
+    elif name == "" or mobile == "":
         st.warning("कृपया नाव आणि मोबाईल नंबर भरा")
-    else:
+     else:
         phone = "919322630703"
 
         message = f"""
