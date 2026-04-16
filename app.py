@@ -130,11 +130,3 @@ else:
     order_data.to_csv("orders.csv", index=False)
 
 
-st.markdown("""
-<style>
-.stApp {
-    background-color: #add8e6;
-    color: white;
-}
-</style>
-""", unsafe_allow_html=True)
