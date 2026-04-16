@@ -39,18 +39,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
-# HEADER (LOGO + TITLE)
-# =========================
-col1, col2 = st.columns([1,6])
 
-with col1:
-    if os.path.exists("logo.png"):
-        st.image("logo.png", width=80)
-
-with col2:
-    st.markdown("<h2>📚 राजहंस पुस्तक पेठ , पुणे ०३८</h2>", unsafe_allow_html=True)
-    st.caption("🎉 ऑफर कालावधी : १६ एप्रिल ते १९ एप्रिल २०२६")
 
 # =========================
 # LOAD DATA
