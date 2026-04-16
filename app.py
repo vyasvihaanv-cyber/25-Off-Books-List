@@ -35,7 +35,7 @@ else:
 st.header("🛒 ऑर्डर करा")
 
 book_name = st.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
-
+selected_books = st.multiselect("📚 पुस्तके निवडा", df["पुस्तकाचे नाव"])
 selected = df[df["पुस्तकाचे नाव"] == book_name].iloc[0]
 
 author = selected["लेखक"]
@@ -99,7 +99,7 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
 एकूण रक्कम: ₹{total}
 
 📞 मोबाईल: {mobile}
-
+      पत्ता: {address}
 कृपया ऑर्डर कन्फर्म करा. 
 धन्यवाद 🙏
 
