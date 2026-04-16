@@ -83,7 +83,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
     col = cols[i % 3]
 
     book = row["पुस्तकाचे नाव"]
-    author = row["लेखक"] | publisher = row["प्रकाशक"]
+    author = row["लेखक"]  publisher = row["प्रकाशक"]
     price = row["किंमत"]
     discount = row["सवलतीत किंमत"]
 
