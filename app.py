@@ -9,14 +9,13 @@ import os
 st.set_page_config(page_title="Book Store", layout="wide")
 
 # =========================
-# CUSTOM CSS (Professional UI)
+# CSS (Professional UI)
 # =========================
 st.markdown("""
 <style>
 .stApp {
     background-color: #f5f7fa;
 }
-
 .card {
     background-color: white;
     padding: 15px;
@@ -24,27 +23,11 @@ st.markdown("""
     box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     margin-bottom: 15px;
 }
-
-.price {
-    color: green;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.old-price {
-    text-decoration: line-through;
-    color: gray;
-}
-
-.discount {
-    color: red;
-    font-weight: bold;
-}
 </style>
 """, unsafe_allow_html=True)
 
 # =========================
-# HEADER (LOGO + SHOP NAME)
+# HEADER (LOGO + TITLE)
 # =========================
 col1, col2 = st.columns([1,6])
 
@@ -94,20 +77,23 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 
     book = row["पुस्तकाचे नाव"]
     author = row["लेखक"]
-    publisher = row["प्रकाशक"]
-    price = row["किंमत"]
-    discount = row["सवलतीत किंमत"]
-
-    discount_percent = int(((price - discount) / price) * 100)
+    price = row["सवलतीत किंमत"]
 
     with col:
-      <p style="text-decoration: line-through; color: gray;">
-     मूळ किंमत: ₹{price}
-</p>
+        st.markdown(f"""
+        <div class="card">
+        <h4>{book}</h4>
+        <p>✍️ {author}</p>
+        <p style="color:green;font-weight:bold;">₹{price}</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-<p style="color: green; font-weight:bold;">
-    सवलतीत: ₹{discount}
-</p>
+        # Initialize qty
+        if book not in st.session_state.cart:
+            st.session_state.cart[book] = {"qty": 0, "price": price}
+
+        c1, c2, c3 = st.columns([1,1,1])
+
         # ➖
         with c1:
             if st.button("➖", key=f"minus_{i}"):
