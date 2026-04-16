@@ -102,7 +102,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 
     with col:
       <p style="text-decoration: line-through; color: gray;">
-    मूळ किंमत: ₹{price}
+     मूळ किंमत: ₹{price}
 </p>
 
 <p style="color: green; font-weight:bold;">
