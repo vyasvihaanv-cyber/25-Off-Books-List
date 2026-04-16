@@ -33,84 +33,9 @@ else:
 # USER INPUT
 # =========================
 st.header("🛒 ऑर्डर करा")
-
-
-book_name = st.selectbox("पुस्तक निवडा", df["पुस्तकाचे नाव"])
-
-selected = df[df["पुस्तकाचे नाव"] == book_name].iloc[0]
-
-author = selected["लेखक"]
-publisher = selected["प्रकाशक"]
-price = selected["किंमत"]
-discount = selected["सवलतीत किंमत"]
-
 quantity = st.number_input("Quantity", 1, 10, 1)
 
-# =========================
-# DISPLAY BOOK
-# =========================
-st.subheader("📖 पुस्तक माहिती")
 
-st.write(f"**पुस्तक:** {book_name}")
-st.write(f"**लेखक:** {author}")
-st.write(f"**प्रकाशक:** {publisher}")
-
-st.write(f"💰 मूळ किंमत: ₹{price}")
-st.write(f"🔥 सवलतीत: ₹{discount}")
-
-# =========================
-# TOTAL
-# =========================
-total = discount * quantity
-
-st.subheader("🧾 एकूण")
-
-st.write(f"Quantity: {quantity}")
-st.write(f"Total: ₹{total}")
-
-# =========================
-# CUSTOMER INFO
-# =========================
-st.subheader("👤 तुमची माहिती")
-
-name = st.text_input("नाव")
-mobile = st.text_input("मोबाईल नंबर WhatsApp")
-address = st.text_input("पत्ता")
-# =========================
-# WHATSAPP ORDER
-# =========================
-if st.button("🟢 WhatsApp वर ऑर्डर करा"):
-
-    if name == "" or mobile == "":
-        st.warning("कृपया नाव आणि मोबाईल नंबर भरा")
-    else:
-        phone = "919322630703"
-
-        message = f"""
-नमस्कार 🙏
-
-मी {name} बोलत आहे.
-
-📚 ऑर्डर तपशील:
-पुस्तक: {book_name}
-लेखक: {author}
-प्रकाशक: {publisher}
-
-संख्या: {quantity}
-एकूण रक्कम: ₹{total}
-
-📞 मोबाईल: {mobile}
-      पत्ता: {address}
-कृपया ऑर्डर कन्फर्म करा. 
-धन्यवाद 🙏
-
-"""
-
-        url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
-
-        st.success("👇 खाली क्लिक करा आणि WhatsApp वर ऑर्डर पाठवा")
-
-        st.markdown(f"[📲 WhatsApp वर ऑर्डर पाठवा]({url})")
 
 
 
@@ -230,7 +155,49 @@ if st.button("🟢 WhatsApp Order (Cart)"):
         phone = "919322630703"
         url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
 
-        st.markdown(f"[📲 WhatsApp वर ऑर्डर करा]({url})")
+       
+
+# =========================
+# CUSTOMER INFO
+# =========================
+st.subheader("👤 तुमची माहिती")
+
+name = st.text_input("नाव")
+mobile = st.text_input("मोबाईल नंबर WhatsApp")
+address = st.text_input("पत्ता")
+
+# =========================
+# WHATSAPP ORDER
+# =========================
 
 
+    if name == "" or mobile == "":
+        st.warning("कृपया नाव आणि मोबाईल नंबर भरा")
+    else:
+        phone = "919322630703"
 
+        message = f"""
+नमस्कार 🙏
+
+मी {name} बोलत आहे.
+
+📚 ऑर्डर तपशील:
+पुस्तक: {book_name}
+लेखक: {author}
+प्रकाशक: {publisher}
+
+संख्या: {quantity}
+एकूण रक्कम: ₹{total}
+
+📞 मोबाईल: {mobile}
+      पत्ता: {address}
+कृपया ऑर्डर कन्फर्म करा. 
+धन्यवाद 🙏
+
+"""
+
+        url = f"https://wa.me/{phone}?text={urllib.parse.quote(message)}"
+
+        st.success("👇 खाली क्लिक करा आणि WhatsApp वर ऑर्डर पाठवा")
+
+        st.markdown(f"[📲 WhatsApp वर ऑर्डर पाठवा]({url})")
