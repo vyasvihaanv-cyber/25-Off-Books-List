@@ -102,12 +102,6 @@ if st.button("🟢 WhatsApp वर ऑर्डर करा"):
 
 
 
-User → WhatsApp Order
-        ↓
-Streamlit → Save Order (CSV)
-        ↓
-Admin Dashboard → View + Analyze
-
 # Save order to CSV
 order_data = pd.DataFrame([{
     "Name": name,
