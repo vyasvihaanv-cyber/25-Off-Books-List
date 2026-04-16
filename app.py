@@ -64,7 +64,7 @@ st.subheader("👤 तुमची माहिती")
 
 name = st.text_input("नाव")
 mobile = st.text_input("मोबाईल नंबर")
-
+address = st.text_input("पत्ता")
 # =========================
 # WHATSAPP ORDER
 # =========================
