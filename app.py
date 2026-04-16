@@ -160,7 +160,7 @@ with col3:
 with col4:
     mobile = st.text_input("मोबाईल नंबर")
 
-wiwith col5:
+with col5:
     address = st.text_input("संपूर्ण पत्ता")
 # =========================
 # WHATSAPP ORDER
