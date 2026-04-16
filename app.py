@@ -133,14 +133,8 @@ else:
 st.markdown("""
 <style>
 .stApp {
-    background-color: #f5f7fa;
-}
-
-.card {
-    background-color: Azure;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+    background-color: #0e1117;
+    color: white;
 }
 </style>
 """, unsafe_allow_html=True)
