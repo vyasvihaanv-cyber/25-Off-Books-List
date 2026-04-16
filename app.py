@@ -77,6 +77,7 @@ for i, (_, row) in enumerate(filtered_df.iterrows()):
 
     book = row["पुस्तकाचे नाव"]
     author = row["लेखक"]
+    publisher = row["प्रकाशक"]
     price = row["सवलतीत किंमत"]
 
     with col:
